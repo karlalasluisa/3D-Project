@@ -7,7 +7,7 @@ Necesita un servidor local (módulos ES) y conexión a internet (three.js se car
 
     python -m http.server 8765      # o: npx serve .
 
-Abrir http://localhost:8765 (también `#medusa`, `#monarca`, `#dragon`, `#reloj`, `#isla`).
+Abrir http://localhost:8765 (también `#medusa`, `#monarca`, `#dragon`, `#reloj`, `#isla`, `#demogorgon`, `#quimera`).
 
 ## Añadir un modelo
 Crear `js/models/<nombre>.js` exportando `{ id, category, icon, accent, name, latin, summary, stats, curiosities, env, camera, build }`
