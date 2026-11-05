@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORBIS · Atlas 3D de maravillas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div id="labels"></div>
+
+<header class="topbar">
+  <div class="brand"><span class="logo"></span><b>ORBIS</b><small>Atlas 3D</small></div>
+  <nav class="tabs" id="tabs"></nav>
+  <button id="btnHelp" class="icon-btn" title="Controles (H)">?</button>
+</header>
+
+<aside class="rail" id="rail"></aside>
+<main class="panel" id="panel"></main>
+<footer class="dock" id="dock"></footer>
+
+<div class="loader on" id="loader"><div class="ring"></div><p>Preparando escena…</p></div>
+<div class="help" id="help">
+  <h4>Cómo moverte</h4>
+  <ul>
+    <li><kbd>Arrastrar</kbd> orbitar</li>
+    <li><kbd>Rueda</kbd> acercar / alejar</li>
+    <li><kbd>Clic der.</kbd> o <kbd>Shift</kbd>+arrastrar: desplazar</li>
+    <li><kbd>W A S D</kbd> recorrer · <kbd>R</kbd>/<kbd>F</kbd> subir / bajar</li>
+    <li><kbd>Doble clic</kbd> viajar hasta ese punto</li>
+    <li><kbd>←</kbd> <kbd>→</kbd> parte anterior / siguiente</li>
+    <li><kbd>X</kbd> explosión · <kbd>G</kbd> estructura · <kbd>L</kbd> etiquetas</li>
+    <li><kbd>T</kbd> recorrido guiado · <kbd>Esc</kbd> volver</li>
+  </ul>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
