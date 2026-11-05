@@ -1,0 +1,53 @@
+name: CI/CD · Desplegar en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:          # en PRs solo se valida, no se despliega
+  workflow_dispatch:     # permite lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  # CI: si algún JS tiene un error de sintaxis, el pipeline se detiene aquí
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Comprobar sintaxis de los módulos JS
+        run: |
+          for f in $(find js -name '*.js'); do
+            node --input-type=module --check < "$f" || { echo "Error en $f"; exit 1; }
+            echo "OK $f"
+          done
+
+  # CD: solo en main y solo si validate ha pasado
+  deploy:
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar carpeta pública
+        run: |
+          mkdir public
+          cp -r index.html css js public/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4
